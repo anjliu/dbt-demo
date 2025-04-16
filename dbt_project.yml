@@ -39,7 +39,10 @@ models:
   show_review_project:
     # Applies to all files under models/example/
     show_review:
-      +materialized: table
+      stg:
+        +materialized: view
+      mart:
+        +materialized: table
       # transform:
       #   +tags: 
       #     - "show_review_cleaning"
