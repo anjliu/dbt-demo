@@ -1,7 +1,8 @@
 {{ config(
     materialized="incremental", 
     unique_key=["show_name","critic_sentiment","critic_review"], 
-    schema = "transform"
+    schema = "transform",
+    tags=["show_review_cleaning"]
     ) }}
 
 SELECT
