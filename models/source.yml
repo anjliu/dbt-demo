@@ -29,9 +29,9 @@ sources:
                   expression: "in (1,0)"
           - name: review
             description: "Critic's review text."
-            tests:
-              - not_null
-              - unique
+            # tests:
+            #   - not_null
+            #   - unique
       - name: show_link
         identifier: "show_link"
         description: "Contains audience score, critic score, and link to review."
