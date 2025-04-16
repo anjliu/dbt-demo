@@ -1,0 +1,37 @@
+sources:
+  - name: bigquery_landing
+    schema: landing
+    tables:
+      - name: audience_review
+        identifier: "audience_review"
+        description: "Contains audience reviews."
+        columns: # doesn't have to be a complete list of all columns.
+          - name: rating
+            description: "The rating of the show, 1-5."
+            tests:
+              - not_null
+              - dbt_utils.expression_is_true:
+                  expression: "<= 5"
+          - name: review
+            description: "Critic's review text."
+            tests:
+              - not_null
+              - unique
+      - name: critic_review
+        identifier: "critic_review"
+        description: "Contains critic reviews."
+        columns: # doesn't have to be a complete list of all columns.
+          - name: sentiment
+            description: "Critic's sentiment towards show."
+            tests:
+              - not_null
+              - dbt_utils.expression_is_true:
+                  expression: "in (1,0)"
+          - name: review
+            description: "Critic's review text."
+            # tests:
+            #   - not_null
+            #   - unique
+      - name: show_link
+        identifier: "show_link"
+        description: "Contains audience score, critic score, and link to review."
