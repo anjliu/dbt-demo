@@ -11,7 +11,12 @@ sources:
             tests:
               - not_null
               - dbt_utils.expression_is_true:
-                  expression: "rating <= 5"
+                  expression: "<= 5"
+          - name: review
+            description: "Critic's review text."
+            tests:
+              - not_null
+              - unique
       - name: critic_review
         identifier: "critic_review"
         description: "Contains critic reviews."
@@ -19,8 +24,14 @@ sources:
           - name: sentiment
             description: "Critic's sentiment towards show."
             tests:
-            - accepted_values:
-                values: [1,0]
+              - not_null
+              - dbt_utils.expression_is_true:
+                  expression: "in (1,0)"
+          - name: review
+            description: "Critic's review text."
+            tests:
+              - not_null
+              - unique
       - name: show_link
         identifier: "show_link"
         description: "Contains audience score, critic score, and link to review."
