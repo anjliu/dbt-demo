@@ -15,7 +15,7 @@
         
         {{ custom_schema_name | trim }}
     
-    {%- elif  env_var('DBT_ENV_TYPE','DEV') == 'PROD' -%}
+    {%- elif  env_var('DBT_ENV_TYPE','DEV') == 'STG' -%}
         
         {{ custom_schema_name | trim }}
 
