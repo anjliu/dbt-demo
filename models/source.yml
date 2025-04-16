@@ -19,8 +19,9 @@ sources:
           - name: sentiment
             description: "Critic's sentiment towards show."
             tests:
-            - accepted_values:
-                values: [1,0]
+              - not_null
+              - dbt_utils.expression_is_true:
+                  expression: "sentiment in (1,0)"
       - name: show_link
         identifier: "show_link"
         description: "Contains audience score, critic score, and link to review."
