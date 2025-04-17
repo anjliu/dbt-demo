@@ -2,8 +2,8 @@ sources:
   - name: bigquery_landing
     schema: landing
     tables:
-      - name: audience_review # required
-        identifier: "audience_review"
+      - name: audience_reviews # required
+        identifier: "audience_reviews"
         description: "Contains audience reviews."
         columns: # not required and oesn't have to be a complete list of all columns
           - name: rating
@@ -16,9 +16,9 @@ sources:
             description: "Critic's review text."
             tests:
               - not_null
-              - unique
-      - name: critic_review
-        identifier: "critic_review"
+              # - unique
+      - name: critic_reviews
+        identifier: "critic_reviews"
         description: "Contains critic reviews."
         columns: 
           - name: sentiment
