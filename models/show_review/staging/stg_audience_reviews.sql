@@ -1,5 +1,5 @@
 {{ config(
-    tags=["show_review_cleaning"]
+    tags=["show_review_stg"]
     ) }}
 
 
