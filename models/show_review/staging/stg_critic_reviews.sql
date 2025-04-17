@@ -1,5 +1,4 @@
 {{ config(
-    schema = "transform",
     tags=["show_review_cleaning"]
     ) }}
 
@@ -8,4 +7,4 @@ SELECT
   CAST(sentiment AS int64) AS critic_sentiment,
   CAST(review AS string) AS critic_review,
   current_timestamp() as created_timestamp
-FROM {{ source("bigquery_landing", "critic_review") }}
+FROM {{ source("bigquery_landing", "critic_reviews") }}
