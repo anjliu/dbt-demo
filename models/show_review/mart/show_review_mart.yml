@@ -5,9 +5,3 @@ models:
         tests:
           - not_null
           - dbt_expectations.expect_column_to_exist
-          # - relationships:
-          #     field: show_name
-          #     to: ref('stg_audience_reviews')
-          # - relationships:
-          #     field: show_name
-          #     to: ref('stg_critic_reviews')
