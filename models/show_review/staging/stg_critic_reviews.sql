@@ -1,10 +1,9 @@
-{{ config(tags=["show_review_stg"]) }}
+{{ config(tags=["stg","show_review_stg"]) }}
 
 with
     critic_reviews as (
         select
             generate_uuid() as skey,
-
             cast(show as string) as show_name,
             cast(sentiment as int64) as critic_sentiment,
             cast(review as string) as critic_review,

@@ -1,4 +1,4 @@
-{{ config(tags=["show_review_stg"]) }}
+{{ config(tags=["stg","show_review_stg"]) }}
 
 with
     audience_reviews as (

@@ -3,6 +3,7 @@
         tags=["fact", "show_review"],
         materialized="incremental",
         unique_key=["show_name", "skey"],
+        schema='mart'
     )
 }}
 
@@ -20,7 +21,7 @@ with
             skey,
             show_name,
             critic_sentiment,
-            null as audience_review,
+            null as audience_rating,
             critic_review as review,
             'critic' as review_type,
             created_at
@@ -37,4 +38,33 @@ with
         from audience_reviews
     )
 select *
-from combined_reviews
+from
+    combined_reviews
+
+    /*
+This script is equivalent to the following:
+
+SELECT
+  skey,
+  show_name,
+  critic_sentiment,
+  NULL AS audience_review,
+  critic_review AS review,
+  'critic' AS review_type,
+  created_at
+FROM
+  `dbt-demo-project-dev.anjie_staging.stg_critic_reviews`
+UNION ALL
+SELECT
+  skey,
+  show_name,
+  NULL AS critic_sentiment,
+  audience_rating,
+  audience_review AS review,
+  'audience' AS review_type,
+  created_at
+FROM
+  `dbt-demo-project-dev.anjie_staging.stg_audience_reviews`;
+
+  */
+    
