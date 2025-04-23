@@ -5,3 +5,10 @@ models:
         tests:
           - not_null
           - dbt_expectations.expect_column_to_exist
+  - name: dim_show_reviews
+    columns:
+      - name: show_name
+        tests:
+          - relationships:
+              field: show_name
+              to: ref('fact_show_reviews')
