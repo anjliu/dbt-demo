@@ -1,12 +1,14 @@
-{{ config(
-    tags=["show_review_stg"]
-    ) }}
+{{ config(tags=["show_review_stg"]) }}
 
-
-SELECT
-  CAST(show AS string) AS show_name,
-  CAST(rating AS numeric) AS audience_rating,
-  CAST(review AS string) AS audience_review,
-  current_timestamp() as created_timestamp
-FROM
-  {{source("bigquery_landing","audience_reviews")}}
+with
+    audience_reviews as (
+        select
+            GENERATE_UUID() as skey,
+            cast(show as string) as show_name,
+            cast(rating as numeric) as audience_rating,
+            cast(review as string) as audience_review,
+            current_timestamp() as created_at
+        from {{ source("bigquery_landing", "audience_reviews") }} as audience_reviews
+    )
+select *
+from audience_reviews
