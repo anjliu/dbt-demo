@@ -35,3 +35,4 @@ sources:
       - name: show_link
         identifier: "show_link"
         description: "Contains audience score, critic score, and link to review."
+  - name: bigquery_staging
