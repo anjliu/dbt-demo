@@ -30,4 +30,4 @@ with
         group by show_name, skey
     )
 select *
-from fact_show_reviews
+from averaged_ratings
