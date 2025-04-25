@@ -1,0 +1,29 @@
+snapshots:
+  - name: dim_show_reviews_scd
+    relation: ref('dim_show_reviews')
+    config:
+      schema: mart
+      unique_key: ['show_name']
+      strategy: check
+      check_cols:
+      - average_critic_sentiment
+      - average_audience_rating
+      - num_reviews
+      - num_audience_reviews
+      - num_critic_reviews
+      dbt_valid_to_current: "timestamp('9999-12-31 00:00:00')" # Specifies that current records should have `dbt_valid_to` set to `'9999-12-31'` instead of `NULL`.
+
+  # - name: string
+  #   relation: relation # source('my_source', 'my_table') or ref('my_model')
+  #   description:  markdown_string
+  #   config:
+  #     database: string
+  #     schema: string
+  #     alias: string
+  #     strategy: timestamp | check
+  #     unique_key: column_name_or_expression
+  #     check_cols: [column_name] | all
+  #     updated_at: column_name
+  #     snapshot_meta_column_names: dictionary
+  #     dbt_valid_to_current: string
+  #     hard_deletes: ignore | invalidate | new_record

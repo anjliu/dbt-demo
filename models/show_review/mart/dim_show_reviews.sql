@@ -2,7 +2,7 @@
     config(
         tags=["dim", "show_review"],
         materialized="incremental",
-        unique_key=["show_name", "skey"],
+        unique_key=["show_name"],
         schema="mart",
     )
 }}
@@ -15,9 +15,10 @@ with
     ),
     averaged_ratings as (
         select
-            generate_uuid() as skey,
             show_name,
-            round(avg(critic_sentiment), 2) as average_critic_sentiment,
+            round(
+                avg(cast(critic_sentiment as numeric)), 2
+            ) as average_critic_sentiment,
             round(avg(audience_rating), 2) as average_audience_rating,
             count(review) as num_reviews,
             sum(
@@ -27,7 +28,7 @@ with
                 case when review_type = 'critic' then 1 else 0 end
             ) as num_critic_reviews
         from fact_show_reviews
-        group by show_name, skey
+        group by show_name
     )
 select *
 from averaged_ratings

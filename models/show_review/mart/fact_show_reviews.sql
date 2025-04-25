@@ -9,11 +9,11 @@
 
 with
     critic_reviews as (
-        select skey, show_name, critic_sentiment, critic_review, created_at
+        select skey, show_name, critic_sentiment, critic_review
         from {{ ref("stg_critic_reviews") }}
     ),
     audience_reviews as (
-        select skey, show_name, audience_rating, audience_review, created_at
+        select skey, show_name, audience_rating, audience_review
         from {{ ref("stg_audience_reviews") }}
     ),
     combined_reviews as (
@@ -23,8 +23,7 @@ with
             critic_sentiment,
             null as audience_rating,
             critic_review as review,
-            'critic' as review_type,
-            created_at
+            'critic' as review_type
         from critic_reviews
         union all
         select
@@ -33,8 +32,7 @@ with
             null as critic_sentiment,
             audience_rating,
             audience_review as review,
-            'audience' as review_type,
-            created_at
+            'audience' as review_type
         from audience_reviews
     )
 select *

@@ -2,12 +2,11 @@
 
 with
     critic_reviews as (
-        select
-            generate_uuid() as skey,
+        select distinct
+            farm_fingerprint(concat(show, sentiment, review)) as skey,
             cast(show as string) as show_name,
             cast(sentiment as int64) as critic_sentiment,
-            cast(review as string) as critic_review,
-            current_timestamp() as created_at
+            cast(review as string) as critic_review
         from {{ source("bigquery_landing", "critic_reviews") }}
     )
 select *
